@@ -51,8 +51,8 @@
                             <td><?= $q['jenis_quisioner']; ?></td>
                             <td>
                               <a href="" data-toggle="modal" data-target="#editquismk<?= $q['kd_quisioner']; ?>" class="btn btn-warning btn-xs ml-3"><i class="fa fa-fw fa-pencil"></i></a>
-                              <!-- =========================================================================== -->
-                              <a href="<?php echo base_url('backend/deletequismk/' . $q['kd_quisioner']); ?>" onclick="return confirm('Apakah Anda Ingin Menghapus Data <?= $q['kd_quisioner']; ?> ?');" class="btn btn-danger btn-circle" title="Hapus Data"><i class="fa fa-trash"></i></a>
+                              <a href="" data-toggle="modal" data-target="#deletequismk<?= $q['kd_quisioner']; ?>" class="btn btn-danger btn-xs ml-3"><i class="fa fa-fw fa-trash"></i></a>
+
                             </td>
 
                           </tr>
@@ -189,11 +189,8 @@ foreach ($quismkdetail as $q) :
         <div class="modal-body">
           <form method="post" action="<?= base_url('backend/deletequismk/'); ?><?= $q['kd_quisioner']; ?>" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
 
-            <div class="item form-group">
-              <div class="col-md-6 col-sm-6 ">
-                <h3>Apakah anda yakin ingin Menghapus data <?= $q['quisioner']; ?> ?</h3>
-              </div>
-            </div>
+            <h5 class="text-center">Apakah anda yakin ingin Menghapus data <?= $q['quisioner']; ?> ?</h5>
+          
 
             <div class="modal-footer">
               <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>

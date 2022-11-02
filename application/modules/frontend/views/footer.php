@@ -39,6 +39,7 @@
 
  <script src="<?= base_url('assets'); ?>/vendors/Chart.js/dist/Chart.min.js"></script>
 
+
  </body>
 
  </html>

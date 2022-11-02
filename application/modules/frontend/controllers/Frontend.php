@@ -123,4 +123,13 @@ class Frontend extends FrontendController
 		$this->load->view('laporan');
 		$this->load->view('footer');
 	}
+
+	public function getJawab()
+	{
+		$this->load->view('header');
+		$this->load->view('navbar');
+		$this->load->view('sidebar');
+		$this->load->view('jawab');
+		$this->load->view('footer');
+	}
 }

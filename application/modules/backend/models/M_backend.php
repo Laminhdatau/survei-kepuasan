@@ -37,7 +37,7 @@ class M_backend extends CI_Model
         $this->db->select('*');
         $this->db->from('t_jenis_quisioner');
         $query = $this->db->get();
-        return $query->result();
+        return $query->result_array();
     }
 
     function inputJenis($data)
@@ -48,11 +48,6 @@ class M_backend extends CI_Model
         $this->db->insert($this->db->dbprefix . 't_jenis_quisioner');
     }
 
-    function deleteJenis($kd_jenis)
-    {
-        $this->db->where('id_jenis_quisioner', $kd_jenis);
-        $this->db->delete('t_jenis_quisioner');
-    }
 
     // ======================================================END JENIS================================================================
 

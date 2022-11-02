@@ -38,7 +38,7 @@
                 <div class="bs-example" data-example-id="simple-jumbotron">
                   <div class="jumbotron jumbotron-fluid row-1 text-center">
                     <h3>Kuisioner Pengajaran Dosen</h3>
-
+                  
                     <h5>[KODE MK] - [MK] - [CLASS] <br></h5>
                     <h5>[NAMA DOSEN] [KODE DOSEN]</h5>
                     <a class="text-danger" href="<?= base_url('quisioner/getquismk'); ?>">&lt;&lt; Kembali Ke Kuis Dosen</a>

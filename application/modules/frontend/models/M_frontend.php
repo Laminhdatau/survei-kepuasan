@@ -10,7 +10,7 @@ class M_frontend extends CI_Model{
         $this->db->select('q.*,j.*');
         $this->db->from('t_quisioner q');
         $this->db->join('t_jenis_quisioner j','q.id_jenis_quisioner=j.id_jenis_quisioner');
-        $this->db->where('j.id_jenis_quisioner=1');
+        $this->db->where("j.id_jenis_quisioner='1401ea97-59ea-11ed-9d98-4d6a2da4ae7b'");
         $this->db->order_by('q.id_jenis_quisioner');
         return $this->db->get()->result_array();
 
@@ -20,7 +20,7 @@ class M_frontend extends CI_Model{
         $this->db->select('q.*,j.*');
         $this->db->from('t_quisioner q');
         $this->db->join('t_jenis_quisioner j','q.id_jenis_quisioner=j.id_jenis_quisioner');
-        $this->db->where('j.id_jenis_quisioner=2');
+        $this->db->where("j.id_jenis_quisioner='1c6c7528-59ea-11ed-9d98-4d6a2da4ae7b'");
         $this->db->order_by('q.id_jenis_quisioner');
         return $this->db->get()->result_array();
 

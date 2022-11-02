@@ -44,9 +44,8 @@
                           <td><?= $q['jenis_quisioner']; ?></td>
                           <td>
                             <a href="" data-toggle="modal" data-target="#editquisdosen<?= $q['kd_quisioner']; ?>" class="btn btn-warning btn-xs ml-3"><i class="fa fa-fw fa-pencil"></i></a>
-                            <!-- =========================================================================== -->
+                            <a href="" data-toggle="modal" data-target="#deletequisdosen<?= $q['kd_quisioner']; ?>" class="btn btn-danger btn-xs ml-3"><i class="fa fa-fw fa-trash"></i></a>
 
-                            <a href="<?php echo base_url('backend/deletequisdosen/' . $q['kd_quisioner']); ?>" onclick="return confirm('Apakah Anda Ingin Menghapus Data <?= $q['kd_quisioner']; ?> ?');" class="btn btn-danger btn-circle" title="Hapus Data"><i class="fa fa-trash"></i></a>
                           </td>
 
                         </tr>
@@ -162,7 +161,35 @@ foreach ($quisdosen as $q) :
   </div>
 <?php endforeach; ?>
 
-<!-- ======================================end 
+<!--  ======================================end  -->
 
 
- 
+
+<?php
+foreach ($quisdosendetail as $q) :
+?>
+  <div class="modal fade" id="deletequisdosen<?= $q['kd_quisioner']; ?>" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h4 class="modal-title" id="myModalLabel"><?= $title; ?></h4>
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form method="post" action="<?= base_url('backend/deletequisdosen/'); ?><?= $q['kd_quisioner']; ?>" id="demo-form2" data-parsley-validate class="form-horizontal form-label-left">
+
+            <h5 class="text-center">Apakah anda yakin ingin Menghapus data <?= $q['quisioner']; ?> ?</h5>
+
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" data-dismiss="modal">No</button>
+              <button type="submit" class="btn btn-warning">Yes</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+<?php endforeach; ?>

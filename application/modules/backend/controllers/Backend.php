@@ -182,7 +182,7 @@ class Backend extends BackendController
 
 	public function deleteAllQuisMk()
 	{
-		$kd = ['kd_quisioner']; // Ambil data kd yang dikirim oleh view.php melalui form submit
+		$kd = $_POST['kd_quisioner']; // Ambil data kd yang dikirim oleh view.php melalui form submit
 		$this->m_backend->deleteAllQmk($kd); // Panggil fungsi delete dari model
 		redirect(base_url('backend/quisdosen'));
 	}
@@ -230,7 +230,7 @@ class Backend extends BackendController
 		$data = [
 			'answer' => $answer
 		];
-		$this->db->set('kd_answer_quisioner', 'UUID()', false);
+		$this->db->set('id_answer', 'UUID()', false);
 		$this->m_backend->inputAnswer($data);
 		redirect(base_url('backend/getAnswer'));
 	}
@@ -299,7 +299,8 @@ class Backend extends BackendController
 
 	public function deleteJenis($id_jenis)
 	{
-		$this->m_backend->deleteJenis($id_jenis);
+		$this->db->where('id_jenis_quisioner',$id_jenis);
+		$this->db->delete('t_jenis_quisioner');
 		redirect(base_url('backend/getJenis'));
 	}
 
