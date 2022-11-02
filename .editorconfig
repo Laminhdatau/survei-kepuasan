@@ -1,0 +1,35 @@
+# This file is for unifying the support PHP PSR-1 PSR-2 standard coding style for different editors and IDEs
+
+# top-most EditorConfig file
+root = true
+
+[*]
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+# Space in JavaScript
+[**.js]
+indent_style = space
+indent_size = 2
+
+# Tabs in Less
+[**.less]
+indent_style = tab
+indent_size = 2
+
+# Tabs in CSS
+[**.css]
+indent_style = tab
+indent_size = 2
+
+# Space in PHP
+[**.php]
+indent_style = space
+indent_size = 4
+
+# Tabs in HTML
+[**.html]
+indent_style = tab
+indent_size = 2
