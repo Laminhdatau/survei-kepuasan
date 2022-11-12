@@ -7,14 +7,21 @@ class M_backend extends CI_Model
     // ============================================================BEGIN QUIS=================================================
     function getQuisionerDosen()
     {
-        $query = $this->db->query("SELECT q.kd_quisioner,q.quisioner,q.status,q.created_up,jq.id_jenis_quisioner,jq.jenis_quisioner FROM t_quisioner q JOIN t_jenis_quisioner jq ON (q.id_jenis_quisioner=jq.id_jenis_quisioner) WHERE jq.id_jenis_quisioner='1' ORDER BY id_jenis_quisioner");
+        $query = $this->db->query("SELECT q.kd_quisioner,q.quisioner,q.status,q.created_up,jq.id_jenis_quisioner,jq.jenis_quisioner FROM t_quisioner q JOIN t_jenis_quisioner jq ON (q.id_jenis_quisioner=jq.id_jenis_quisioner) WHERE jq.id_jenis_quisioner='1' ORDER BY q.status='1' DESC");
         return $query->result_array();
     }
     function getQuisionerMataKuliah()
     {
-        $query = $this->db->query("SELECT q.kd_quisioner,q.quisioner,q.status,q.created_up,jq.id_jenis_quisioner,jq.jenis_quisioner FROM t_quisioner q JOIN t_jenis_quisioner jq ON (q.id_jenis_quisioner=jq.id_jenis_quisioner) WHERE jq.id_jenis_quisioner='2' ORDER BY id_jenis_quisioner");
+        $query = $this->db->query("SELECT q.kd_quisioner,q.quisioner,q.status,q.created_up,jq.id_jenis_quisioner,jq.jenis_quisioner FROM t_quisioner q JOIN t_jenis_quisioner jq ON (q.id_jenis_quisioner=jq.id_jenis_quisioner) WHERE jq.id_jenis_quisioner='2' ORDER BY q.status='1' DESC");
         return $query->result_array();
-    }
+    } 
+    
+    function getQuisionerTracer()
+    {
+    $query = $this->db->query("SELECT q.kd_quisioner,q.quisioner,q.status,q.created_up,jq.id_jenis_quisioner,jq.jenis_quisioner FROM t_quisioner q JOIN t_jenis_quisioner jq ON (q.id_jenis_quisioner=jq.id_jenis_quisioner) WHERE jq.id_jenis_quisioner='3' ORDER BY q.status='1' DESC");
+    return $query->result_array();
+}
+
     function inputQuis($data)
     {
         $this->db->select('*');
@@ -58,9 +65,8 @@ class M_backend extends CI_Model
         $this->db->select('*');
         $this->db->from('t_answer');
         $this->db->ORDER_BY('id_answer');
-        $this->db->limit(4);
         $query = $this->db->get();
-        return $query->result();
+        return $query->result_array();
     }
 
     function inputAnswer($data)
@@ -80,18 +86,22 @@ class M_backend extends CI_Model
     // ==========================================================END ANSWER=======================================================
 
     // ==========================================================BEGIN MAHASISWA=======================================================
-    function getMhs()
+    function getMahasiswa()
     {
         $this->db->select('*');
         $this->db->from('t_mahasiswa');
+        $this->db->join('t_biodata','t_biodata.nik=t_mahasiswa.nik');
+        $this->db->ORDER_BY('nim')->DESC;
         $query = $this->db->get();
-        return $query->result();
+        return $query->result_array();
     }
 
     function inputMhs()
     {
         $this->db->select('*');
         $this->db->from('t_mahasiswa');
+        $this->db->join('t_biodata', 't_biodata.nik=t_mahasiswa.nik');
+        $this->db->get();
         $this->db->insert($this->db->dbprefix . 't_mahasiswa');
     }
 
@@ -175,7 +185,7 @@ class M_backend extends CI_Model
     {
         $this->db->select('*');
         $this->db->from('t_comments');
-        $this->db->insert($this->db->dbprefix . 't_comments');
+        $this->db->insert($this->db->c . 't_comments');
     }
 
     function editComments($kd_comments)
@@ -195,8 +205,8 @@ class M_backend extends CI_Model
     // ========================================================BEGIN ANS QUIS=======================================================
     function getAnswerQuisioner()
     {
-
-        return $this->db->query("SELECT aq.*,m.*,d.*,q.*,a.* FROM t_answer_quisioner aq join t_mahasiswa m on aq.nim=m.nim join t_dosen_pengampu d on aq.kd_dosen_pengampuh=d.kd_dosen_pengampuh join t_quisioner q on aq.kd_quisioner=q.kd_quisioner join t_answer a on aq.id_answer=a.id_answer ORDER BY aq.nim ASC")->result_array();
+        $this->db->select("") ;
+        
     }
 
 

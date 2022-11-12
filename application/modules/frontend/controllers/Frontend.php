@@ -36,24 +36,48 @@ class Frontend extends FrontendController
 	public function InputQuisDosen()
 	{
 
-		$kd_answer = $this->input->post('kd_answer_quisioner');
+		// $kd_answer = $this->input->post('kd_answer_quisioner');
+		// $nim = $this->input->post('nim');
+		// $kd_quis = $this->input->post('kd_quisioner');
+		// $kd_dosen = $this->input->post('kd_dosen_pengampuh');
+		// $id_option = $this->input->post('id_answer');
+		// $comments = $this->input->post('comments');
+		// $waktu = $this->input->post('waktu');
+
+		// // $is=array('kd_quisioner[]');
+		// $kd_quis = 'kd_quisioner[]';
+		// $id_option='id_answer[]';
+		// $data = array(
+		// 	'nim' => $nim,
+		// 	'kd_quisioner' => $kd_quis,
+		// 	'kd_dosen_pengampuh' => $kd_dosen,
+		// 	'id_answer' => $id_option,
+		// 	'comments' => $comments,
+		// 	'waktu' => date('Y-m-d H:i:s')
+		// );
+		// $this->db->set('kd_answer_quisioner', 'UUID()', false);
+
+
+
+		$kd = $this->input->post('kd_answer_quisioner');
 		$nim = $this->input->post('nim');
-		$kd_quis = $this->input->post('kd_quisioner');
-		$kd_dosen = $this->input->post('kd_dosen_pengampuh');
-		$id_option = $this->input->post('id_answer');
+		$quis = $this->input->post('kd_quisioner');
+		$dosen = $this->input->post('kd_dosen_pengampuh');
+		$answer = $this->input->post('id_answer');
 		$comments = $this->input->post('comments');
 		$waktu = $this->input->post('waktu');
 
-		$data = array(
-			'nim' => $nim,
-			'kd_quisioner' => $kd_quis,
-			'kd_dosen_pengampuh' => $kd_dosen,
-			'id_answer' => $id_option,
-			'comments' => $comments,
-			'waktu' => date('Y-m-d H:i:s')
-		);
-		$this->db->set('kd_answer_quisioner', 'UUID()', false);
-		$this->m_frontend->inputQuisionerDosen($data);
+		// $data = array(
+		// 	'nim' => '',
+		// 	'kd_quisioner' => '',
+		// 	'kd_dosen_pengampuh' => '',
+		// 	'id_answer' => '',
+		// 	'comments' => '',
+		// 	'waktu' => date('Y-m-d H:i:s')
+		// );
+		$kkd=$this->db->set('kd_answer_quisioner','UUID()',false);
+		$this->m_frontend->simpan_quis($kd,$nim,$quis,$dosen,$answer,$comments,$waktu);
+		// $this->m_frontend->inputQuisionerDosen($data);
 	}
 
 	// ==============================================END QUISIONER DOSEN======================================================

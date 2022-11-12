@@ -31,15 +31,16 @@
 
                     <tbody>
                       <?php
+                     
                       $no = 1;
                       foreach ($quisdosendetail as $q) { ?>
                         <tr>
                           <td><?= $no++;; ?></td>
                           <td><?= $q['quisioner']; ?></td>
                           <td><?php if ($q['status'] == 1) : ?>
-                              <?php echo "Aktif"; ?>
+                              <span class="badge badge-success">Aktif</span>
                             <?php else : ?>
-                              <?php echo "Tidak Aktif"; ?>
+                              <span class="badge badge-danger">Tidak Aktif</span>
                             <?php endif; ?></td>
                           <td><?= $q['jenis_quisioner']; ?></td>
                           <td>

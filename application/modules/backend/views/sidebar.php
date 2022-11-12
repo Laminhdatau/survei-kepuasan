@@ -76,8 +76,8 @@
           <div id="sidebar-menu" class="main_menu_side hidden-print main_menu ">
             <div class="menu_section">
               <ul class="nav side-menu ">
-                <li><a href="<?= base_url(); ?>"><i class="fa fa-home fa-fw" style="color:#75006a"></i> Dashboard</a></li>
-                <li><a><i class="fa fa-table fa-fw" style="color:#75006a"></i> Data Master <span class="fa fa-chevron-down" style="color:#75006a"></span></a>
+                <li><a href="<?= base_url(); ?>"><i class="fa fa-home fa-fw" style="color:#75006a"></i>DASHBOARD</a></li>
+                <li><a><i class="fa fa-table fa-fw" style="color:#75006a"></i> DATA MASTER <span class="fa fa-chevron-down" style="color:#75006a"></span></a>
                   <ul class="nav child_menu">
                     <li><a href="<?= base_url('backend/quisdosen'); ?>">Kuis Dosen</a></li>
                     <li><a href="<?= base_url('backend/quismk'); ?>">Kuis Mata Kuliah</a></li>
@@ -87,10 +87,23 @@
                   </ul>
                 </li>
               </ul>
+
               <ul class="nav side-menu ">
                 <li>
                   <a>
-                    <i class="fa fa-bar-chart fa-fw" style="color:#75006a"></i> Grafik <span class="fa fa-chevron-down" style="color:#75006a"></span>
+                    <i class="fa fa-mortar-board fa-fw" style="color:#75006a"></i> AKADEMIK <span class="fa fa-chevron-down" style="color:#75006a"></span>
+                  </a>
+                  <ul class="nav child_menu">
+                    <li><a href="<?= base_url('backend/getMahasiswa'); ?>">Mahasiswa</a></li>
+                  </ul>
+                </li>
+
+              </ul>
+
+              <ul class="nav side-menu ">
+                <li>
+                  <a>
+                    <i class="fa fa-bar-chart fa-fw" style="color:#75006a"></i> HASIL <span class="fa fa-chevron-down" style="color:#75006a"></span>
                   </a>
                   <ul class="nav child_menu">
                     <li><a href="#">Grafik</a></li>
@@ -98,7 +111,6 @@
                     <li><a href="<?= base_url('backend/AnswerQuisioner'); ?>">Hasil Kuis</a></li>
                   </ul>
                 </li>
-
               </ul>
             </div>
 
