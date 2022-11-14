@@ -12,18 +12,21 @@ class Backend extends BackendController
 		$this->load->model('m_backend');
 		$this->form_validation->set_rules('quisioner', 'Kuisioner', 'required|trim');
 		$this->form_validation->set_rules('status', 'Status', 'required|trim');
+		
+
+
 	}
 
 
 	public function index()
 	{
 		$data['title'] = "Dashboard";
-		$data['user'] = $this->db->get_where('t_user', ['user' => $this->session->userdata('user')])->row();
-		$this->load->view('header', $data);
-		$this->load->view('sidebar');
-		$this->load->view('navbar', $data);
-		$this->load->view('backend/Dashboard', $data);
-		$this->load->view('footer');
+		$data['user'] = $this->db->get_where('t_user', ['user' => $this->session->userdata('user')])->row_array();
+		$this->load->view('template/header', $data);
+		$this->load->view('template/sidebar');
+		$this->load->view('template/navbar', $data);
+		$this->load->view('backend/Dashboard');
+		$this->load->view('template/footer');
 	}
 
 	public function quisDosen()
@@ -32,11 +35,11 @@ class Backend extends BackendController
 		$data['jtable'] = "Kuis Dosen";
 		$data['quisdosen'] = $this->db->get('t_quisioner')->result_array();
 		$data['quisdosendetail'] = $this->db->query("SELECT q.*,j.* from t_quisioner q join t_jenis_quisioner j on (q.id_jenis_quisioner=j.id_jenis_quisioner) where (j.id_jenis_quisioner='1') order by quisioner asc ")->result_array();
-		$this->load->view('header', $data);
-		$this->load->view('sidebar');
-		$this->load->view('navbar');
+		$this->load->view('template/header', $data);
+		$this->load->view('template/sidebar');
+		$this->load->view('template/navbar');
 		$this->load->view('backend/QuisionerDosen', $data);
-		$this->load->view('footer');
+		$this->load->view('template/footer');
 	}
 
 	public function fungsiInputQuisDosen()
@@ -59,7 +62,7 @@ class Backend extends BackendController
 			];
 			$this->db->set('kd_quisioner', 'UUID()', FALSE);
 			$this->m_backend->inputQuis($data);
-			$this->session->set_flashdata('message', '<div class="alert alert-warning alert-dismissible fade show text-white" role="alert">Data berhasil ditambahkan<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			$this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show text-white" role="alert">Data berhasil ditambahkan<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 		<span aria-hidden="true">&times;</span></button></div>');
 			redirect(base_url('backend/quisdosen'));
 		}
@@ -87,7 +90,7 @@ class Backend extends BackendController
 			$this->db->where('kd_quisioner', $kd_quis);
 			$this->db->update('t_quisioner', $data);
 			// $this->m_backend->editQuisDetail($data);
-			$this->session->set_flashdata('message', '<div class="alert alert-warning alert-dismissible fade show text-white" role="alert">Data Berhasil Di Update<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			$this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show text-white" role="alert">Data Berhasil Di Update<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 		<span aria-hidden="true">&times;</span></button></div>');
 			redirect(base_url('backend/quisdosen'));
 		}
@@ -97,7 +100,7 @@ class Backend extends BackendController
 
 		$this->db->where('kd_quisioner', $kd_quis);
 		$this->db->delete('t_quisioner');
-		$this->session->set_flashdata('message', '<div class="alert alert-warning alert-dismissible fade show text-white" role="alert">Data Berhasil Di Hapus<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		$this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show text-white" role="alert">Data Berhasil Di Hapus<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 		<span aria-hidden="true">&times;</span></button></div>');
 		redirect(base_url('backend/quisdosen'));
 	}
@@ -115,11 +118,11 @@ class Backend extends BackendController
 		$data['jtable'] = "Kuis Matakuliah";
 		$data['quismk'] = $this->db->get('t_quisioner')->result_array();
 		$data['quismkdetail'] = $this->db->query("SELECT q.*,j.* from t_quisioner q join t_jenis_quisioner j on (q.id_jenis_quisioner=j.id_jenis_quisioner) where (j.id_jenis_quisioner='2') order by quisioner asc")->result_array();
-		$this->load->view('header', $data);
-		$this->load->view('sidebar');
-		$this->load->view('navbar');
+		$this->load->view('template/header', $data);
+		$this->load->view('template/sidebar');
+		$this->load->view('template/navbar');
 		$this->load->view('backend/QuisionerMataKuliah', $data);
-		$this->load->view('footer');
+		$this->load->view('template/footer');
 	}
 
 	public function fungsiInputQuisMk()
@@ -136,7 +139,7 @@ class Backend extends BackendController
 		];
 		$this->db->set('kd_quisioner', 'UUID()', FALSE);
 		$this->m_backend->inputQuis($data);
-		$this->session->set_flashdata('message', '<div class="alert alert-warning alert-dismissible fade show text-white" role="alert">Data berhasil ditambahkan<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		$this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show text-white" role="alert">Data berhasil ditambahkan<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 		<span aria-hidden="true">&times;</span></button></div>');
 		redirect(base_url('backend/quismk'));
 	}
@@ -161,7 +164,7 @@ class Backend extends BackendController
 			$this->db->where('kd_quisioner', $kd_quis);
 			$this->db->update('t_quisioner', $data);
 			// $this->m_backend->editQuisDetail($data);
-			$this->session->set_flashdata('message', '<div class="alert alert-warning alert-dismissible fade show text-white" role="alert">Data Berhasil di update <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			$this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show text-white" role="alert">Data Berhasil di update <button type="button" class="close" data-dismiss="alert" aria-label="Close">
 		<span aria-hidden="true">&times;</span></button></div>');
 			redirect(base_url('backend/quismk'));
 		}
@@ -187,11 +190,11 @@ class Backend extends BackendController
 		$data['title'] = "Options";
 		$data['jtable'] = "Options";
 		$data['answer'] = $this->m_backend->getAnswer();
-		$this->load->view('header', $data);
-		$this->load->view('sidebar');
-		$this->load->view('navbar');
+		$this->load->view('template/header', $data);
+		$this->load->view('template/sidebar');
+		$this->load->view('template/navbar');
 		$this->load->view('backend/Answer', $data);
-		$this->load->view('footer');
+		$this->load->view('template/footer');
 	}
 
 	public function fungsiInputAnswer()
@@ -203,7 +206,7 @@ class Backend extends BackendController
 			'answer' => $answer
 		];
 		$this->m_backend->inputAnswer($data);
-		$this->session->set_flashdata('message', '<div class="alert alert-warning alert-dismissible fade show text-white" role="alert">Data berhasil ditambahkan<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		$this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show text-white" role="alert">Data berhasil ditambahkan<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 		<span aria-hidden="true">&times;</span></button></div>');
 		redirect(base_url('backend/getAnswer'));
 	}
@@ -225,7 +228,7 @@ class Backend extends BackendController
 
 			$this->db->where('id_answer', $id_answer);
 			$this->db->update('t_answer', $arr);
-			$this->session->set_flashdata('message', '<div class="alert alert-warning alert-dismissible fade show text-white" role="alert">Data Berhasil ditambahkan<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			$this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show text-white" role="alert">Data Berhasil ditambahkan<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 		<span aria-hidden="true">&times;</span></button></div>');
 			redirect(base_url('backend/getAnswer'));
 		}
@@ -234,7 +237,7 @@ class Backend extends BackendController
 	public function deleteAnswer($id_answer)
 	{
 		$this->m_backend->deleteAnswer($id_answer);
-		$this->session->set_flashdata('message', '<div class="alert alert-warning alert-dismissible fade show text-white" role="alert">Data Berhasil dihapus<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		$this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show text-white" role="alert">Data Berhasil dihapus<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 		<span aria-hidden="true">&times;</span></button></div>');
 		redirect(base_url('backend/getAnswer'));
 	}
@@ -248,11 +251,11 @@ class Backend extends BackendController
 		$data['title'] = "Jenis Quisioner";
 		$data['jtable'] = "Jenis Kuisioner";
 		$data['jenis'] = $this->m_backend->getJenis();
-		$this->load->view('header', $data);
-		$this->load->view('sidebar');
-		$this->load->view('navbar');
+		$this->load->view('template/header', $data);
+		$this->load->view('template/sidebar');
+		$this->load->view('template/navbar');
 		$this->load->view('backend/Jenis', $data);
-		$this->load->view('footer');
+		$this->load->view('template/footer');
 	}
 
 
@@ -269,7 +272,7 @@ class Backend extends BackendController
 			];
 			$this->db->set('id_jenis_quisioner', 'UUID()', false);
 			$this->m_backend->inputJenis($data);
-			$this->session->set_flashdata('message', '<div class="alert alert-warning alert-dismissible fade show text-white" role="alert">Data Berhasil ditambahkan<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			$this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show text-white" role="alert">Data Berhasil ditambahkan<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 		<span aria-hidden="true">&times;</span></button></div>');
 			redirect(base_url('backend/getJenis'));
 		}
@@ -292,7 +295,7 @@ class Backend extends BackendController
 
 			$this->db->where('id_jenis_quisioner', $id_jenis);
 			$this->db->update('t_jenis_quisioner', $arr);
-			$this->session->set_flashdata('message', '<div class="alert alert-warning alert-dismissible fade show text-white" role="alert">Data Berhasil ditambahkan<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+			$this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show text-white" role="alert">Data Berhasil ditambahkan<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 		<span aria-hidden="true">&times;</span></button></div>');
 			redirect(base_url('backend/getJenis'));
 		}
@@ -302,7 +305,7 @@ class Backend extends BackendController
 	{
 		$this->db->where('id_jenis_quisioner', $id_jenis);
 		$this->db->delete('t_jenis_quisioner');
-		$this->session->set_flashdata('message', '<div class="alert alert-warning alert-dismissible fade show text-white" role="alert">Data Berhasil Dihapus<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		$this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show text-white" role="alert">Data Berhasil Dihapus<button type="button" class="close" data-dismiss="alert" aria-label="Close">
 		<span aria-hidden="true">&times;</span></button></div>');
 		redirect(base_url('backend/getJenis'));
 	}
@@ -318,23 +321,123 @@ class Backend extends BackendController
 	{
 		$data['title'] = "Mahasiswa";
 		$data['mhs'] = $this->m_backend->getMahasiswa();
-		$this->load->view('header', $data);
-		$this->load->view('sidebar');
-		$this->load->view('navbar');
+		$this->load->view('template/header', $data);
+		$this->load->view('template/sidebar');
+		$this->load->view('template/navbar');
 		$this->load->view('backend/Mahasiswa', $data);
 		$this->load->view('footer', $data);
 	}
 
-	// ========================================END HASIL DOSEN=========================================================================
+	// ========================================END Mahasiswa=========================================================================
 
+	// ========================================BEGIN dosen=====================================================================
+
+
+
+	public function getDosen()
+	{
+		$data['title'] = "Dosen";
+		$data['dosen'] = $this->m_backend->getDosen();
+		$this->load->view('template/header', $data);
+		$this->load->view('template/sidebar');
+		$this->load->view('template/navbar');
+		$this->load->view('backend/Dosen', $data);
+		$this->load->view('footer', $data);
+	}
+
+	// ========================================END dosen=========================================================================
+
+	// ========================================BEGIN Mk=====================================================================
+
+	public function getMk()
+	{
+		$data['title'] = "Mk";
+		$data['Mk'] = $this->m_backend->getMk();
+		$this->load->view('template/header', $data);
+		$this->load->view('template/sidebar');
+		$this->load->view('template/navbar');
+		$this->load->view('backend/Matakuliah', $data);
+		$this->load->view('footer', $data);
+	}
+
+	// ========================================END Mk=========================================================================
 
 	public function Hasil()
 	{
 		$this->load->view('header');
-		$this->load->view('sidebar');
-		$this->load->view('navbar');
+		$this->load->view('template/sidebar');
+		$this->load->view('template/navbar');
 		$this->load->view('backend/AnswerQuisioner');
-		$this->load->view('footer');
+		$this->load->view('template/footer');
+	}
 
+	public function GetUser()
+	{
+		$data['user'] = $this->m_backend->getUser();
+		$data['userl'] = $this->m_backend->getLevel();
+		$this->load->view('template/header');
+		$this->load->view('template/sidebar');
+		$this->load->view('template/navbar');
+		$this->load->view('backend/User', $data);
+		$this->load->view('template/footer');
+	}
+	public function fungsiinputuser()
+	{
+		
+			$id = $this->input->post('kd_user', true);
+			$user = $this->input->post('user', true);
+			$pass = password_hash($this->input->post('password', true), PASSWORD_DEFAULT);
+			$passs = $this->input->post('pass', true);
+			$status = $this->input->post('status', true);
+			$idx = $this->input->post('idx', true);
+			$level = $this->input->post('id_level', true);
+			$data = [
+				'user' => $user,
+				'password' => $pass,
+				'pass' => $passs,
+				'status' => '1',
+				'idx' => '1',
+				'id_level' => $level
+			];
+			$this->db->set('kd_user', 'UUID()', false);
+			$this->m_backend->inputUser($data);
+			// $this->db->insert('t_user', $data);
+			$this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show text-white" role="alert">Data Berhasil ditambahkan<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		<span aria-hidden="true">&times;</span></button></div>');
+			redirect(base_url('backend/getUser'));
+		// }
+	}
+
+	public function fungsiupdateuser($id)
+	{
+			$id = $this->input->post('kd_user');
+			$user = $this->input->post('user');
+			$pass = password_hash($this->input->post('password'),PASSWORD_DEFAULT);
+			$status = $this->input->post('status');
+			$passs = $this->input->post('pass');
+			$idx = $this->input->post('idx');
+			$level = $this->input->post('id_level');
+			$data = [
+				'user' => $user,
+				'password' => $pass,
+				'pass' => $passs,
+				'status' => 1,
+				'idx' => 1,
+				'id_level' => $level
+			];
+			$this->db->where('kd_user', $id);
+			$this->db->update('t_user', $data);
+			$this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show text-white" role="alert">Data Berhasil diupdate<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		<span aria-hidden="true">&times;</span></button></div>');
+			redirect(base_url('backend/getUser'));
+		
+	}
+	public function deleteUser($kd_user)
+	{
+		$this->db->where('kd_user', $kd_user);
+		$this->db->delete('t_user');
+		$this->session->set_flashdata('message', '<div class="alert alert-success alert-dismissible fade show text-white" role="alert">Data Berhasil Dihapus<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+		<span aria-hidden="true">&times;</span></button></div>');
+		redirect(base_url('backend/getUser'));
 	}
 }

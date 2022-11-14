@@ -10,7 +10,7 @@
       <div class="col-md-12 col-sm-12 ">
         <div class="x_panel">
           <div class="x_title">
-            <h2>Page : Jenis <?= $jtable; ?></h2>
+            <h2>Page : <?= $jtable; ?></h2>
 
             <div class="clearfix"></div>
           </div>
@@ -36,7 +36,7 @@
                           <td><?= $no++; ?></td>
                           <td><?= $a['answer']; ?></td>
                           <td>
-                            <a href="#" data-toggle="modal" data-target="#editOption<?= $a['id_answer']; ?>" class="btn btn-info btn-xs"><i class="fa fa-fw fa-pencil"></i> </a>
+                            <a href="#" data-toggle="modal" data-target="#editOption<?= $a['id_answer']; ?>" class="btn btn-warning btn-xs"><i class="fa fa-fw fa-pencil"></i> </a>
                             <a href="#" data-toggle="modal" data-target="#deleteOption<?= $a['id_answer']; ?>" class="btn btn-danger btn-xs"><i class="fa fa-fw fa-trash-o"></i> </a>
 
                           </td>

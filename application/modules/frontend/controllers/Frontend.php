@@ -12,12 +12,12 @@ class Frontend extends FrontendController
 	public function index()
 	{
 		$data['title'] = "HALAMAN MAHASISWA";
-		$data['user'] = $this->db->get_where('t_user', ['user' => $this->session->userdata('user')])->row();
-		$this->load->view('header', $data);
-		$this->load->view('sidebar');
-		$this->load->view('navbar');
+		$data['user'] = $this->db->get_where('t_user', ['user' => $this->session->userdata('user')])->row_array();
+		$this->load->view('template/header', $data);
+		$this->load->view('template/sidebar');
+		$this->load->view('template/navbar');
 		$this->load->view('dashboard', $data);
-		$this->load->view('footer');
+		$this->load->view('template/footer');
 	}
 
 	public function getQuisDosen()
@@ -25,11 +25,11 @@ class Frontend extends FrontendController
 		$data['title'] = "Kuisioner Dosen";
 		$data['quisdosen'] = $this->m_frontend->getQuisionerDosen();
 		// $data['option']=$this->m_frontend->getAnswer();
-		$this->load->view('header', $data);
-		$this->load->view('sidebar');
-		$this->load->view('navbar');
+		$this->load->view('template/header', $data);
+		$this->load->view('template/sidebar');
+		$this->load->view('template/navbar');
 		$this->load->view('kuis_dosen', $data);
-		$this->load->view('footer');
+		$this->load->view('template/footer');
 	}
 
 
@@ -89,12 +89,12 @@ class Frontend extends FrontendController
 		$data['title'] = "Kuisioner Mata Kuliah";
 
 		$data['quismk'] = $this->m_frontend->getQuisionerMk();
-		$this->load->view('header', $data);
+		$this->load->view('template/header', $data);
 
-		$this->load->view('sidebar');
-		$this->load->view('navbar');
+		$this->load->view('template/sidebar');
+		$this->load->view('template/navbar');
 		$this->load->view('kuis_mk', $data);
-		$this->load->view('footer');
+		$this->load->view('template/footer');
 	}
 
 	public function InputQuisMk()
@@ -130,11 +130,11 @@ class Frontend extends FrontendController
 	{
 		$data['title'] = "Quisioner Mata Kuliah";
 
-		$this->load->view('header', $data);
-		$this->load->view('navbar');
+		$this->load->view('template/header', $data);
+		$this->load->view('template/navbar');
 		$this->load->view('sidebar', $data);
 		$this->load->view('kuis_mk', $data);
-		$this->load->view('footer');
+		$this->load->view('template/footer');
 	}
 
 	// =========================================END MATA KULIAH =======================================================
@@ -142,18 +142,18 @@ class Frontend extends FrontendController
 	public function getLap()
 	{
 		$this->load->view('header');
-		$this->load->view('navbar');
-		$this->load->view('sidebar');
+		$this->load->view('template/navbar');
+		$this->load->view('template/sidebar');
 		$this->load->view('laporan');
-		$this->load->view('footer');
+		$this->load->view('template/footer');
 	}
 
 	public function getJawab()
 	{
 		$this->load->view('header');
-		$this->load->view('navbar');
-		$this->load->view('sidebar');
+		$this->load->view('template/navbar');
+		$this->load->view('template/sidebar');
 		$this->load->view('jawab');
-		$this->load->view('footer');
+		$this->load->view('template/footer');
 	}
 }

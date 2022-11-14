@@ -9,7 +9,7 @@
                         <li class="nav-item dropdown open" style="padding-left: 15px;">
                     <a href="javascript:;"  class="user-profile dropdown-toggle x text-danger" aria-haspopup="true" id="navbarDropdown" data-toggle="dropdown" aria-expanded="false">
                       <img src="<?= base_url('assets'); ?>/images/img.jpg" alt="">
-                      <span style="color:white;"><?= $user['username']; ?></span>
+                      <span style="color:white;"><?= $user['user']; ?></span>
                     </a>
                     <div class="dropdown-menu dropdown-usermenu pull-right" aria-labelledby="navbarDropdown">
                       <a class="dropdown-item"  href="javascript:;"> Profile</a>

@@ -95,6 +95,8 @@
                   </a>
                   <ul class="nav child_menu">
                     <li><a href="<?= base_url('backend/getMahasiswa'); ?>">Mahasiswa</a></li>
+                    <li><a href="<?= base_url('backend/getDosen'); ?>">Dosen</a></li>
+                    <li><a href="<?= base_url('backend/getPeriode'); ?>">Periode</a></li>
                   </ul>
                 </li>
 

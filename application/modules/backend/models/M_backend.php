@@ -89,26 +89,9 @@ class M_backend extends CI_Model
     function getMahasiswa()
     {
         $this->db->select('*');
-        $this->db->from('t_mahasiswa');
-        $this->db->join('t_biodata','t_biodata.nik=t_mahasiswa.nik');
-        $this->db->ORDER_BY('nim')->DESC;
+        $this->db->from('v_mahasiswa');
         $query = $this->db->get();
         return $query->result_array();
-    }
-
-    function inputMhs()
-    {
-        $this->db->select('*');
-        $this->db->from('t_mahasiswa');
-        $this->db->join('t_biodata', 't_biodata.nik=t_mahasiswa.nik');
-        $this->db->get();
-        $this->db->insert($this->db->dbprefix . 't_mahasiswa');
-    }
-
-    function deleteMhs($kd_mhs)
-    {
-        $this->db->where('id_mahasiswa', $kd_mhs);
-        $this->db->delete('t_mahasiswa');
     }
     // ==========================================================END MAHASISWA=======================================================
 
@@ -116,91 +99,22 @@ class M_backend extends CI_Model
     function getDosen()
     {
         $this->db->select('*');
-        $this->db->from('t_dosen_pengampu');
+        $this->db->from('t_dosen');
         $query = $this->db->get();
-        return $query->result();
+        return $query->result_array();
     }
 
-    function inputDosen()
-    {
-        $this->db->select('*');
-        $this->db->from('t_dosen_pengampu');
-        $this->db->insert($this->db->dbprefix . 't_dosen_pengampu');
-    }
-
-    function editDosen($kd_)
-    {
-        $this->db->where('kd_dosen_pengampu', $kd_);
-        $query = $this->db->get('t_dosen_pengampu');
-        return $query->row();
-    }
-
-    function deleteDosen($kd_)
-    {
-        $this->db->where('kd_dosen', $kd_);
-        $this->db->delete('t_dosen_pengampu');
-    }
     // ==========================================================END DOSEN===============================================================
 
     // ==========================================================BEGIN MATA KULIAH=======================================================
     function getMk()
     {
         $this->db->select('*');
-        $this->db->from('t_mk');
+        $this->db->from('t_mata_kuliah');
         $query = $this->db->get();
-        return $query->result();
-    }
-
-    function inputMk($data)
-    {
-        $this->db->select('*');
-        $this->db->from('t_mk');
-        $this->db->insert($this->db->dbprefix . 't_mk');
-    }
-
-    function editMk($kd_mk)
-    {
-        $this->db->where('kd_mk', $kd_mk);
-        $query = $this->db->get('t_mk');
-        return $query->row();
-    }
-
-    function deleteMk($kd_mk)
-    {
-        $this->db->where('kd_mk', $kd_mk);
-        $this->db->delete('t_mk');
+        return $query->result_array();
     }
     // ==========================================================END MATA KULIAH=======================================================
-
-    // ==========================================================BEGIN COMMENTS=======================================================
-    function getComments()
-    {
-        $this->db->select('*');
-        $this->db->from('t_comments');
-        $query = $this->db->get();
-        return $query->result();
-    }
-
-    function inputComments()
-    {
-        $this->db->select('*');
-        $this->db->from('t_comments');
-        $this->db->insert($this->db->c . 't_comments');
-    }
-
-    function editComments($kd_comments)
-    {
-        $this->db->where('kd_comments', $kd_comments);
-        $query = $this->db->get('t_comments');
-        return $query->row();
-    }
-
-    function deleteComments($kd_comments)
-    {
-        $this->db->where('kd_comments', $kd_comments);
-        $this->db->delete('t_comments');
-    }
-    // ==========================================================END COMMENTS=======================================================
 
     // ========================================================BEGIN ANS QUIS=======================================================
     function getAnswerQuisioner()
@@ -217,15 +131,30 @@ class M_backend extends CI_Model
     }
     // =============================================================END ANS QUIS==================================================================
 
-
-    // ===================================count=======================================
-    function getGrafikQuisMk()
+    function getuser()
     {
-        $this->db->select('kd_dosen_pengampu', 'id_answer');
-        $this->db->from('t_answer_quisioner');
-        $this->db->ORDER_BY('kd_dosen_pengampu');
-        return $this->db->get()->result();
+        $this->db->select('*');
+        $this->db->from('t_user');
+        $this->db->join('t_level', 't_user.id_level=t_level.id_level');
+        $query = $this->db->get();
+        return $query->result_array();
     }
-    // =============================================endcount=============================================
+    function getLevel()
+    {
+        $this->db->select('*');
+        $this->db->from('t_level');
+        $query = $this->db->get();
+        return $query->result_array();
+    }
+    
+
+    function inputUser($data)
+    {
+        $this->db->select('*');
+        $this->db->from('t_user');
+        $this->db->set($data);
+        $this->db->insert($this->db->dbprefix . 't_user');
+    }
+
 
 }
